@@ -1,0 +1,27 @@
+
+//递归
+public class Solution {
+    public boolean Find(int target, int [][] array) {
+        return dfs(target,array,0,0);
+    }
+    public boolean dfs(int target,int [][] array,int i,int j){
+        if(i>array.length-1) return false;
+        if(j>array[0].length-1) return false;
+        if(target==array[i][j]) return true;
+        if(target<array[i][j]) return false;
+        return dfs(target,array,i+1,j)||dfs(target,array,i,j+1);
+    }
+}
+
+//从左下角开始比较小于当前元素向上走，大于当前元素向右走
+public class Solution {
+    public boolean Find(int target, int [][] array) {
+        if(array.length==0) return false;
+        for(int i=array.length-1,j=0;i>=0&&j<array[0].length;){
+            if(array[i][j]<target) j++;
+            else if(array[i][j]>target) i--;
+            else return true;
+        }
+        return false;
+    }
+}
