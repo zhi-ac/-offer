@@ -1,0 +1,41 @@
+//新增一个数组
+public class Solution {
+    public String replaceSpace(StringBuffer str) {
+        StringBuffer stringbuffer = new StringBuffer();
+        int len = str.length();
+        for (int i = 0; i < len; i++){
+            if (str.charAt(i)== ' ') {
+                stringbuffer.append("%20");
+            } else {
+                stringbuffer.append(str.charAt(i));
+            }
+        }
+        return stringbuffer.toString();
+    }
+}
+
+//将原数组扩大
+public class Solution {
+    public String replaceSpace(StringBuffer str) {
+        int oldlen = str.length();
+        int spaceenum = 0;
+        for(int i=0;i<oldlen;i++){
+            if(str.charAt(i)==' '){
+                spaceenum++;
+            }
+        }
+        int newlen = oldlen+(spaceenum<<1);
+        str.setLength(newlen);
+        for(int i=newlen-1,j=oldlen-1;i>=0&&i!=j;j--){
+            if(str.charAt(j)==' '){
+                str.setCharAt(i--,'0');
+                str.setCharAt(i--,'2');
+                str.setCharAt(i--,'%');
+            }else{
+                str.setCharAt(i--,str.charAt(j));
+            }
+        }
+        return str.toString();
+        
+    }
+}
