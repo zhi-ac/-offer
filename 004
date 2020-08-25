@@ -1,0 +1,45 @@
+
+//
+public class Solution {
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        TreeNode root;
+        root = dfs(pre,0,pre.length-1,in,0,in.length-1);
+        return root;
+    }
+    
+    public TreeNode dfs(int [] pre,int prel,int prer,int []in,int inl,int inr){
+        if(prel>prer||inl>inr) return null;
+        TreeNode root=new TreeNode(pre[prel]);
+        int mid = 0;
+        for(int i=inl;i<=inr;i++){
+            mid++;
+               if(in[i]==pre[prel]){
+                   break;
+               }
+        }
+        root.left = dfs(pre,prel+1,prel+mid-1,in,inl,inl+mid-2);
+        root.right = dfs(pre,prel+mid,prer,in,inl+mid,inr);
+            
+        return root;
+    }
+}
+
+
+public class Solution {
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        return dfs(pre,0,pre.length-1,in,0,in.length-1);
+    }
+    
+    public TreeNode dfs(int [] pre,int prel,int prer,int []in,int inl,int inr){
+        if(prel>prer||inl>inr) return null;
+        TreeNode root=new TreeNode(pre[prel]);
+        for(int i=inl;i<=inr;i++){
+               if(in[i]==pre[prel]){
+                       root.left = dfs(pre,prel+1,prel+i-inl,in,inl,i-1);
+                        root.right = dfs(pre,prel+i-inl+1,prer,in,i+1,inr);
+                   break;
+               }
+        }
+        return root;
+    }
+}
