@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+public class Solution {
+    public int minNumberInRotateArray(int [] array) {
+        return binary(array,0,array.length-1);
+    }
+    public int binary(int [] array,int low ,int height){
+        if(array[low]<array[height]) return array[low];
+        if(low>=height) return array[low];
+        int mid = (low+height)>>1;
+        if(array[mid]<array[height]){
+            return binary(array,low,mid);
+        }else if(array[mid]>array[height]){
+            return binary(array,mid+1,height);
+        }else{
+            return binary(array,low,height-1);
+        }
+    }
+}
+
+
+import java.util.ArrayList;
+public class Solution {
+    public int minNumberInRotateArray(int [] array) {
+        int low = 0;
+        int height = array.length-1;
+        int mid;
+        while(low<height){
+            if(array[low]<array[height]) return array[low];
+            mid = low+((height-low)>>1);
+            if(array[mid]<array[height]){
+                height = mid;
+            }else if(array[mid]>array[height]){
+                low = mid+1;
+            }else{
+                height--;
+            }
+        }
+        return array[low];
+    }
+}
