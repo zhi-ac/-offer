@@ -1,0 +1,11 @@
+public class Solution {
+    public int Fibonacci(int n) {
+        int p=0,q=1;
+            while((n--)>0){
+                q+=p;
+                p=q-p;
+            }
+            return p;
+    }
+}
+
