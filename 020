@@ -1,0 +1,29 @@
+
+
+public ArrayList<Integer> printMatrix(int [][] matrix) {
+       ArrayList<Integer> list = new ArrayList<>();
+        if(matrix.length==0) return list;
+        int i=0,j=0,k=0;
+        while(true){
+            for(j=k;j<matrix[0].length;j++){
+                list.add(matrix[i][j]);
+            }
+            j--;
+            for(i=k+1;i<matrix.length;i++){
+                list.add(matrix[i][j]);
+            }
+            i--;
+            for(j=matrix[0].length-1-k;j>=k;j--){
+                list.add(matrix[i][j]);
+            }
+            j++;
+            for(i=matrix.length-1-k;i>k;i--){
+                list.add(matrix[i][j]);
+            }
+            i++;
+            if(k>(list>>1)){
+                break;
+            }
+        }
+        return list;
+    }
