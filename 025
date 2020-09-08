@@ -1,0 +1,86 @@
+/*
+public class RandomListNode {
+    int label;
+    RandomListNode next = null;
+    RandomListNode random = null;
+
+    RandomListNode(int label) {
+        this.label = label;
+    }
+}
+*/
+
+//直接法
+public class Solution {
+    public RandomListNode Clone(RandomListNode pHead){
+        if(pHead==null) return null;
+        RandomListNode pTemp = pHead;
+        RandomListNode codeHead = new RandomListNode(-1);
+        RandomListNode codeTemp = codeHead;
+        while(pTemp!=null){
+            codeTemp.next=new RandomListNode(pTemp.label);
+            codeTemp = codeTemp.next;
+            pTemp = pTemp.next;
+        }
+        codeHead=codeHead.next;
+        RandomListNode pRandom,codeNext = codeHead,pNext = pHead;
+        while(codeNext!=null){
+            
+            pRandom = pNext.random;
+            pTemp = pHead;
+            codeTemp = codeHead;
+            while(pTemp!=null){
+                if(pTemp==pRandom){
+                    codeNext.random=codeTemp;
+                }
+                pTemp=pTemp.next;
+                codeTemp = codeTemp.next;
+            }
+            pNext = pNext.next;
+            codeNext = codeNext.next;
+        }
+        return codeHead;
+        
+    }
+}
+
+
+
+/*
+public class RandomListNode {
+    int label;
+    RandomListNode next = null;
+    RandomListNode random = null;
+
+    RandomListNode(int label) {
+        this.label = label;
+    }
+}
+*/
+public class Solution {
+    public RandomListNode Clone(RandomListNode pHead){
+        if(pHead==null) return null;
+        RandomListNode curNode = pHead;
+        RandomListNode temp;
+        while(curNode!=null){
+            temp = new RandomListNode(curNode.label);
+            temp.next=curNode.next;
+            curNode.next=temp;
+            curNode = temp.next;
+        }
+        curNode = pHead;
+        while(curNode!=null){
+            if(curNode.random!=null)
+            curNode.next.random = curNode.random.next;
+            curNode = curNode.next.next;
+        }
+        curNode = pHead;
+        RandomListNode codeHead = pHead.next;
+        while(curNode.next!=null){
+            temp = curNode.next;
+            curNode.next=temp.next;
+            curNode = temp;
+        }
+        return codeHead;
+    }
+}
