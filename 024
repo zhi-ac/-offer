@@ -1,0 +1,56 @@
+
+
+ArrayList<ArrayList<Integer>> list2 = new ArrayList<>();
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root,int target) {
+        ArrayList<Integer> list1 = new ArrayList<>();
+        dfs(root,target,list1);
+        return list2;
+    }
+    //arrayList 是地址传递不是值传递
+    public void dfs(TreeNode root,int target,ArrayList<> list){
+        if(root==null) return;
+        ArrayList<Integer> temp = new ArrayList<>(list);
+        temp.add(root.val);
+        target-=root.val;
+        if(target==0) list2.add(temp);
+        dfs(root.left,target,temp);
+        dfs(root.right,target,temp);
+    }
+    
+ 
+ 
+public class Solution {
+    ArrayList<ArrayList<Integer>> list2 = new ArrayList<>();
+    ArrayList<Integer> list1 = new ArrayList<>();
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root,int target) {
+        dfs(root,target);
+        return list2;
+    }
+    public void dfs(TreeNode root,int target){
+        if(root==null) return;
+        list1.add(root.val);
+        target-=root.val;
+        if(target==0&&root.left==null&&root.right==null) list2.add(new ArrayList<Integer>(list1));
+        dfs(root.left,target);
+        dfs(root.right,target);
+        list1.remove(list1.size()-1);
+    }
+}
+
+
+
+
+public class Solution {
+    ArrayList<ArrayList<Integer>> list2 = new ArrayList<>();
+    ArrayList<Integer> list1 = new ArrayList<>();
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root,int target) {
+        if(root==null) return list2;
+        list1.add(root.val);
+        target-=root.val;
+        if(target==0&&root.left==null&&root.right==null) list2.add(new ArrayList<Integer>(list1));
+        FindPath(root.left,target);
+        FindPath(root.right,target);
+        list1.remove(list1.size()-1);
+        return list2;
+    }
+}
