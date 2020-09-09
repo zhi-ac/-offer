@@ -1,0 +1,83 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+
+
+
+//字符创全排序
+public class Solution {
+    public ArrayList<String> Permutation(String str) {
+        ArrayList<String> list = new ArrayList<String>();
+        if(str.length()!=0){
+            PermutationHelper(str.toCharArray(),0,list);
+            Collections.sort(list);
+        }
+        return list;
+    }
+    private void PermutationHelper(char[] str,int i,ArrayList<String> list){
+        if(i==str.length-1){
+            list.add(String.valueOf(str));
+        }else{
+            Set<Character> set=new HashSet<Character>();
+            for(int j=i;j<str.length;j++){
+                if(j==i||!set.contains(str[j])){
+                    set.add(str[j]);
+                    Swap(str,i,j);
+                    PermutationHelper(str,i+1,list);
+                    Swap(str,i,j);
+                }
+            }
+        }
+    }
+    private void Swap(char[] str,int i,int j){
+        char ch  = str[i];
+        str[i] = str[j];
+        str[j] = ch;
+    }
+    
+}
+
+
+
+
+//字典序排列算法
+public class Solution {
+    public ArrayList<String> Permutation(String str) {
+       ArrayList<String> list = new ArrayList<>();
+       if(str.length()==0) return list;
+       char[] chars = str.toCharArray();
+       Arrays.sort(chars);
+       list.add(String.valueOf(chars));
+       while(true){
+       int i = chars.length-1;
+       while(i-1>=0&&chars[i-1]>=chars[i])
+           i--;
+       if(i==0) break;
+       else{
+           int m = i;
+           while(m<chars.length&&chars[i-1]<chars[m]){
+               m++;
+           }
+          Swap(chars,m-1,i-1);
+           reverseChars(chars,i);
+           list.add(String.valueOf(chars));
+       }   
+       }
+        return list;
+    }
+    private void reverseChars(char[] chars,int i){
+        int j = chars.length-1;
+        while(i<j){
+            Swap(chars,i,j);
+            i++;
+            j--;
+        }
+    }
+    private void Swap(char[] chars,int i,int j){
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+    }
+}
