@@ -1,0 +1,23 @@
+//num1,num2分别为长度为1的数组。传出参数
+//将num1[0],num2[0]设置为返回结果
+public class Solution {
+    public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) {
+        int a=0,b=0,c=0;
+        for(int i=0;i<array.length;i++){
+            c^=array[i];
+        }
+        int temp = 1;
+        while((temp|c)!=c){
+            temp<<=1;
+        }
+        for(int i=0;i<array.length;i++){
+            if((temp|array[i])==array[i]){
+                a^=array[i];
+            }else{
+                b^=array[i];
+            }
+        }
+        num1[0] = a;
+        num2[0] = b;
+    }
+}
